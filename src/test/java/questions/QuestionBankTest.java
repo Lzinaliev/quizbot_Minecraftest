@@ -48,4 +48,10 @@ class QuestionBankTest {
         assertEquals(q.text(), result.text());
         assertEquals(q.answer(), result.answer());
     }
+
+    @Test
+    void defaultBankHasFiftyMinecraftQuestions() {
+        QuestionBank bank = new QuestionBank();
+        assertEquals(50, bank.size());
+    }
 }
