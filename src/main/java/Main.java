@@ -1,6 +1,6 @@
 import console.ConsoleRunner;
 import dialog.DialogEngine;
-import dialog.UserSession;
+import dialog.DialogManager;
 import questions.QuestionBank;
 
 /**
@@ -11,7 +11,7 @@ public class Main {
     public static void main(String[] args) {
         QuestionBank bank = new QuestionBank();
         DialogEngine engine = new DialogEngine(bank);
-        UserSession session = new UserSession(engine);
-        new ConsoleRunner(session).run();
+        DialogManager manager = new DialogManager(engine);
+        new ConsoleRunner(manager).run();
     }
 }

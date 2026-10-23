@@ -52,6 +52,6 @@ public class DialogEngine {
     }
 
     private static String normalize(String s) {
-        return s.trim().replaceAll("\\s+", " ").toLowerCase(Locale.ROOT).replace('ё', 'е');
+        return s.trim().replaceAll("\\s+", " ").toLowerCase(Locale.ROOT).replace('\u0451', '\u0435');
     }
 }

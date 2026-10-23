@@ -9,13 +9,22 @@ import questions.Question;
  */
 public class UserSession {
 
+    private final String userId;
     private final DialogEngine engine;
     private Question current;
     private int correct;
     private int total;
 
-    public UserSession(DialogEngine engine) {
+    public UserSession(String userId, DialogEngine engine) {
+        if (userId == null || userId.isBlank()) {
+            throw new IllegalArgumentException("userId не может быть пустым");
+        }
+        this.userId = userId;
         this.engine = engine;
+    }
+
+    public String getUserId() {
+        return userId;
     }
 
     /** Начало диалога: приветствие и первый вопрос. */
@@ -24,7 +33,12 @@ public class UserSession {
         return engine.greeting() + "\n\n" + prompt(current);
     }
 
-    /** Обрабатывает ввод пользователя и возвращает реплику бота. */
+    /**
+     * Обрабатывает ввод пользователя и возвращает реплику бота.
+     *
+     * @param input текст, приславший пользователь (может быть пустым)
+     * @return ответ бота
+     */
     public String handle(String input) {
         if (current == null) {
             return start();
@@ -36,7 +50,7 @@ public class UserSession {
             return "Неизвестная команда. Введите " + DialogEngine.HELP_COMMAND
                     + ", чтобы узнать, что я умею.\n\n" + prompt(current);
         }
-        if (input.isBlank()) {
+        if (input == null || input.isBlank()) {
             return "Пустой ответ. Попробуйте ещё раз.\n\n" + prompt(current);
         }
 
